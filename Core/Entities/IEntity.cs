@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Entities.Abstack
+namespace Core.Entities
 {
-    public interface IEntity
+    public class IEntity
     {
-
     }
 }
