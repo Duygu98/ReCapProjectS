@@ -1,6 +1,10 @@
-﻿using System;
+﻿using Core.Entities;
+using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using System.Text;
+using System.Linq.Expressions;
+using System.Linq;
 
 namespace Core.DataAccess.EntityFramework
 {
@@ -9,9 +13,9 @@ namespace Core.DataAccess.EntityFramework
         where TContext : DbContext, new()
 
     {
-        public void Add(Brand entity)
+        public void Add(TEntity entity)
         {
-            using (CarDbContext context = new CarDbContext())
+            using (TContext context = new TContext())
             {
                 var addedEntity = context.Entry(entity);
                 addedEntity.State = EntityState.Added;
@@ -19,9 +23,9 @@ namespace Core.DataAccess.EntityFramework
             }
         }
 
-        public void Delete(Brand entity)
+        public void Delete(TEntity entity)
         {
-            using (CarDbContext context = new CarDbContext())
+            using (TContext context = new TContext())
             {
                 var deletedEntity = context.Entry(entity);
                 deletedEntity.State = EntityState.Deleted;
@@ -30,32 +34,32 @@ namespace Core.DataAccess.EntityFramework
             }
         }
 
-        public Brand Get(Expression<Func<Brand, bool>> filter)
+        public TEntity Get(Expression<Func<TEntity, bool>> filter)
         {
-            using (CarDbContext context = new CarDbContext())
+            using (TContext context = new TContext())
             {
-                return context.Set<Brand>().SingleOrDefault(filter);
+                return context.Set<TEntity>().SingleOrDefault(filter);
             }
         }
 
-        public List<Brand> GetAll(Expression<Func<Brand, bool>> filter = null)
+        public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
         {
-            using (CarDbContext context = new CarDbContext())
+            using (TContext context = new TContext())
             {
                 return filter == null
-                    ? context.Set<Brand>().ToList()
-                    : context.Set<Brand>().Where(filter).ToList();
+                    ? context.Set<TEntity>().ToList()
+                    : context.Set<TEntity>().Where(filter).ToList();
             }
         }
 
-        public List<Brand> GetById(int entity)
+        public List<TEntity> GetById(int entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Brand entity)
+        public void Update(TEntity entity)
         {
-            using (CarDbContext context = new CarDbContext())
+            using (TContext context = new TContext())
             {
                 var updatedEntity = context.Entry(entity);
                 updatedEntity.State = EntityState.Modified;

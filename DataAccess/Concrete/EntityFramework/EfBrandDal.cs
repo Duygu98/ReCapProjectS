@@ -1,4 +1,5 @@
-﻿using DataAccess.Abstack;
+﻿using Core.DataAccess.EntityFramework;
+using DataAccess.Abstack;
 using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,7 +10,7 @@ using System.Text;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfBrandDal : IBrandDal
+    public class EfBrandDal : EfEntityRepositoryBase<Brand, CarDbContext>, IBrandDal
     {
 
     }
