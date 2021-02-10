@@ -11,10 +11,26 @@ namespace ConsolePrj
     {
         static void Main(string[] args)
         {
+            //CarText();
+            CarManager carManager = new CarManager(new EfCarDal());
+
+            foreach (var car in carManager.GetCarDetails())
+            {
+                Console.WriteLine("Car Name : "+ car.CarName + "\t Brand Name :"+car.BrandName +
+                                "\t Color Name :  "+ car.ColorName + "\t DailyPrice : "+car.DailyPrice );
+            }
+
+
+
+
+        }
+
+        private static void CarText()
+        {
             CarManager carManager = new CarManager(new EfCarDal());
 
             Console.WriteLine("Hangi işlemi yapmak istersiniz? \n 1- Araba Listeleme  \n 2- Marka Listeleme  \n 3- Renk Listeleme  \n 2- Ekleme \n 3-Cıkıs");
-            var cevap= Convert.ToInt32(Console.ReadLine());
+            var cevap = Convert.ToInt32(Console.ReadLine());
             var baslangic = 0;
             switch (cevap)
             {
@@ -50,7 +66,7 @@ namespace ConsolePrj
                         Console.WriteLine("CarId: {0}, CarName: {1}, BrandId: {2}, ColorId: {3}, DailyPrice: {4}, ModelYear: {5}, Description: {6}",
                            car.Id, car.CarName, car.BrandId, car.ColorId, car.DailyPrice, car.ModelYear, car.Description);
                     }
-                 
+
 
                     break;
 
@@ -77,13 +93,6 @@ namespace ConsolePrj
                 default:
                     break;
             }
-
-
-
-         
-
-            
-
         }
     }
 }
