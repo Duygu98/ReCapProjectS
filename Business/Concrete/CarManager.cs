@@ -12,16 +12,17 @@ namespace Business.Concrete
 {
     public class CarManager : ICarService
     {
-        IMemory _car;
+        ICarDal _car;
 
-        public CarManager(IMemory car)
+        public CarManager(ICarDal car)
         {
             _car = car;
         }
 
         public IResult Delete(Car car)
         {
-            throw new NotImplementedException();
+            _car.Delete(car);
+            return new SuccessResult(Messages.CarDelete);
         }
 
         public IDataResult<List<Car>> GetAll()
@@ -51,18 +52,19 @@ namespace Business.Concrete
 
         public IResult Update(Car car)
         {
-            throw new NotImplementedException();
+            _car.Update(car);
+            return new SuccessResult(Messages.CarUpdate);
         }
 
         public IResult Add(Car car)
         {
             if (car.CarName.Length<2)
             {
-                return new ErrorResult(Messages.BrandNameInvalid);
+                return new ErrorResult(Messages.CarNameInvalid);
             }
                          
             _car.Add(car);
-            return new SuccessResult(Messages.BrandAdded);
+            return new SuccessResult(Messages.CarAdded);
         
         }
     }

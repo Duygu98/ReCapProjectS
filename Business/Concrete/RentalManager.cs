@@ -18,8 +18,8 @@ namespace Business.Concrete
         }
         public IResult Add(Rental rental)
         {
-            _rental.Delete(rental);
-            return new SuccessResult(Messages.RentalDelete);
+            _rental.Add(rental);
+            return new SuccessResult(Messages.RentalAdded);
         }
 
         public IResult Delete(Rental rental)

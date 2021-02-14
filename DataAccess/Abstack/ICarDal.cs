@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DataAccess.Abstack
 {
-    public interface IMemory : IEntityRepository<Car>
+    public interface ICarDal : IEntityRepository<Car>
     {
         List<CarDetailDto> GetCarDetails();
     }

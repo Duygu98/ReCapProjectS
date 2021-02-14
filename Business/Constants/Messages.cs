@@ -10,6 +10,8 @@ namespace Business.Constants
         public static string CarAdded = "Araba eklendi.";
         public static string CarNameInvalid = "Araba adı geçersiz";
         public static string CarListed = "Arabalar Listelendi";
+        public static string CarUpdate = "Araba Güncellendi";
+        public static string CarDelete = "Araba Kayıdı Silindi";
 
 
         public static string BrandAdded = "Marka eklendi.";
@@ -32,12 +34,13 @@ namespace Business.Constants
         public static string UserAdded = "User eklendi.";
         public static string UserInvalid = "User adı geçersiz";
 
-        public static string MaintenanceTime { get; internal set; }
+        public static string MaintenanceTime = "Sistem Bakımda";
         public static string CustomerDelete { get; internal set; }
         public static string CustomerUpdate { get; internal set; }
         public static string RentalDelete { get; internal set; }
         public static string RentalUpdate { get; internal set; }
         public static string UserDelete { get; internal set; }
         public static string UserUpdate { get; internal set; }
+      
     }
 }
