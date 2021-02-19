@@ -1,5 +1,7 @@
 ﻿using Business.Abstack;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstack;
 using Entities.Concrete;
@@ -56,12 +58,9 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarUpdate);
         }
 
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
-        {
-            if (car.CarName.Length<2)
-            {
-                return new ErrorResult(Messages.CarNameInvalid);
-            }
+        {  
                          
             _car.Add(car);
             return new SuccessResult(Messages.CarAdded);
