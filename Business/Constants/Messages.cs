@@ -35,10 +35,10 @@ namespace Business.Constants
         public static string UserInvalid = "User adı geçersiz";
 
         public static string MaintenanceTime = "Sistem Bakımda";
-        internal static string ImageDelete;
-        internal static string ImageUpdate;
-        internal static string CarImagesCount;
-        internal static string ImageAdded;
+        public static string ImageDelete = "Sistem Bakımda";
+        public static string ImageUpdate = "Sistem Bakımda";
+        public static string CarImagesCount = "Sistem Bakımda";
+        public static string ImageAdded = "Sistem Bakımda";
 
         public static string CustomerDelete { get; internal set; }
         public static string CustomerUpdate { get; internal set; }

@@ -1,5 +1,6 @@
 ﻿using Business.Abstack;
 using Business.Constants;
+using Core.Entities.Concrete;
 using Core.Utilities.Results;
 using DataAccess.Abstack;
 using Entities.Concrete;
@@ -9,39 +10,29 @@ using System.Text;
 
 namespace Business.Concrete
 {
+
     public class UserManager : IUserService
     {
-        IUserDal _user;
-        public UserManager(IUserDal user)
+        IUserDal _userDal;
+
+        public UserManager(IUserDal userDal)
         {
-            _user = user;         
+            _userDal = userDal;
         }
 
-        public IResult Add(User user)
+        public List<OperationClaim> GetClaims(User user)
         {
-            _user.Add(user);
-            return new SuccessResult(Messages.UserAdded);
+            return _userDal.GetClaims(user);
         }
 
-        public IResult Delete(User user)
+        public void Add(User user)
         {
-            _user.Delete(user);
-            return new SuccessResult(Messages.UserDelete);
+            _userDal.Add(user);
         }
 
-        public IDataResult<List<User>> GetAll()
+        public User GetByMail(string email)
         {
-            if (DateTime.Now.Hour == 21)
-            {
-                return new ErrorDataResult<List<User>>(Messages.MaintenanceTime);
-            }
-
-            return new SuccessDataResult<List<User>>(_user.GetAll(), Messages.UserListed);
-        }
-        public IResult Update(User user)
-        {
-            _user.Update(user);
-            return new SuccessResult(Messages.UserUpdate);
+            return _userDal.Get(u => u.Email == email);
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using Business.Abstack;
-using Entities.Concrete;
+﻿using Business.Abstract;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,57 +11,50 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class AuthController : Controller
     {
+        private IAuthService _authService;
 
-        IUserService _userservice;
-        public UsersController(IUserService userservice)
+        public AuthController(IAuthService authService)
         {
-            _userservice = userservice;
+            _authService = authService;
         }
 
-        [HttpGet("getall")]
-        public IActionResult Get()
+        [HttpPost("login")]
+        public ActionResult Login(UserForLoginDto userForLoginDto)
         {
-            var result = _userservice.GetAll();
+            var userToLogin = _authService.Login(userForLoginDto);
+            if (!userToLogin.Success)
+            {
+                return BadRequest(userToLogin.Message);
+            }
+
+            var result = _authService.CreateAccessToken(userToLogin.Data);
             if (result.Success)
             {
-                return Ok(result);
+                return Ok(result.Data);
             }
-            return BadRequest(result);
+
+            return BadRequest(result.Message);
         }
 
-        [HttpPost("add")]
-        public IActionResult Add(User user)
+        [HttpPost("register")]
+        public ActionResult Register(UserForRegisterDto userForRegisterDto)
         {
-            var result = _userservice.Add(user);
-            if (result.Success)
+            var userExists = _authService.UserExists(userForRegisterDto.Email);
+            if (!userExists.Success)
             {
-                return Ok(result);
+                return BadRequest(userExists.Message);
             }
-            return BadRequest(result);
-        }
 
-        [HttpPost("delete")]
-        public IActionResult Delete(User user)
-        {
-            var result = _userservice.Delete(user);
+            var registerResult = _authService.Register(userForRegisterDto, userForRegisterDto.Password);
+            var result = _authService.CreateAccessToken(registerResult.Data);
             if (result.Success)
             {
-                return Ok(result);
+                return Ok(result.Data);
             }
-            return BadRequest(result);
-        }
 
-        [HttpPost("update")]
-        public IActionResult Update(User user)
-        {
-            var result = _userservice.Update(user);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
+            return BadRequest(result.Message);
         }
     }
 }

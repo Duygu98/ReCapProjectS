@@ -1,11 +1,15 @@
 ﻿using Business.Abstack;
 using Business.Constants;
 using Core.Utilities.Business;
+using Core.Utilities.FileHelpers;
 using Core.Utilities.Results;
 using DataAccess.Abstack;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace Business.Concrete
@@ -19,7 +23,7 @@ namespace Business.Concrete
             _carImages = carImages;
         }
 
-        public IResult Add(CarImages carImages)
+        public IResult Add(IFormFile file,CarImages carImages)
         {
             IResult result = BusinessRules.Run(CheckCarImageCount(carImages.CarId));
             if (result != null)
@@ -27,16 +31,17 @@ namespace Business.Concrete
                 return result;
             }
 
-
-            string randomPath = GuidFunction();
-            carImages.CarId = carImages.CarId;
-            carImages.ImagePath = randomPath;
+            carImages.ImagePath = FileHelper.Add(file);
             carImages.Date = DateTime.Now;
             _carImages.Add(carImages);
-
             return new SuccessResult(Messages.ImageAdded);
 
 
+        }
+
+        public IResult Add(CarImages carImages)
+        {
+            throw new NotImplementedException();
         }
 
         public IResult Delete(CarImages carImages)
@@ -66,6 +71,14 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ImageUpdate);
         }
 
+        public IResult Update(IFormFile file, CarImages carImages)
+        {
+            carImages.ImagePath = FileHelper.Update(_carImages.Get(p => p.Id == carImages.Id).ImagePath, file);
+            carImages.Date = DateTime.Now;
+            _carImages.Update(carImages);
+            return new SuccessResult();
+        }
+
         private IResult CheckCarImageCount(int carId)
         {
             var carImageCount = _carImages.GetAll(p => p.CarId == carId).Count;
@@ -76,11 +89,16 @@ namespace Business.Concrete
             }
             return new SuccessResult();
         }
-
-        private string GuidFunction()
+        private List<CarImages> CheckIfCarImageNull(int id)
         {
-            string unique = Guid.NewGuid().ToString();
-            return unique + ".jpg";
+            string path = @"\Images\logo.jpg";
+            var result = _carImages.GetAll(c => c.CarId == id).Any();
+            if (!result)
+            {
+                return new List<CarImages> { new CarImages { CarId = id, ImagePath = path, Date = DateTime.Now } };
+            }
+            return _carImages.GetAll(p => p.CarId == id);
         }
+
     }
 }
