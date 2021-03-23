@@ -15,7 +15,7 @@ namespace Core.CrossCuttingConcerns.Logging.Log4Net
         public LoggerServiceBase(string name)
         {
             XmlDocument xmlDocument = new XmlDocument();
-            xmlDocument.Load(File.OpenRead("log4net.config"));
+         //   xmlDocument.Load(File.OpenRead("log4net.config"));
 
             ILoggerRepository loggerRepository = LogManager.CreateRepository(Assembly.GetEntryAssembly(),
                 typeof(log4net.Repository.Hierarchy.Hierarchy));
