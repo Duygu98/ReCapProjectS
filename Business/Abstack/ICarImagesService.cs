@@ -9,13 +9,13 @@ namespace Business.Abstack
 {
     public interface ICarImagesService
     {
-        IResult Add(IFormFile file, CarImages carImage);
-        IResult Update(IFormFile file, CarImages carImages);
+        IResult Add(IFormFile file, CarImage carImage);
+        IResult Update(IFormFile file, CarImage carImages);
 
-        IResult Add(CarImages carImages);
-        IResult Delete(CarImages carImages);
-        IResult Update(CarImages carImages);
-        IDataResult<List<CarImages>> GetAll();
-        IDataResult<CarImages> GetImagesByCarId(int id);
+        IResult Add(CarImage carImages);
+        IResult Delete(CarImage carImages);
+        IResult Update(CarImage carImages);
+        IDataResult<List<CarImage>> GetAll();
+        IDataResult<CarImage> GetImagesByCarId(int id);
     }
 }

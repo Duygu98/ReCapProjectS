@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DataAccess.Abstack
 {
-    public interface ICarImagesDal : IEntityRepository<CarImages>
+    public interface ICarImagesDal : IEntityRepository<CarImage>
     {
 
 

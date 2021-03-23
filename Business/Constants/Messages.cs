@@ -39,6 +39,8 @@ namespace Business.Constants
         public static string ImageUpdate = "Sistem Bakımda";
         public static string CarImagesCount = "Sistem Bakımda";
         public static string ImageAdded = "Sistem Bakımda";
+        public static string FailAddedImageLimit = "Resim limitine erişildi";
+        
 
         public static string CustomerDelete { get; internal set; }
         public static string CustomerUpdate { get; internal set; }

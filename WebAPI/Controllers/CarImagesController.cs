@@ -1,4 +1,5 @@
 ﻿using Business.Abstack;
+using Core.Utilities.FileHelper;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -31,17 +32,21 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add([FromForm(Name = ("Images"))] IFormFile file, [FromForm] CarImages carImages)
+        public IActionResult AddAsync([FromForm(Name = ("Image"))] IFormFile file, [FromForm] CarImage carImage)
         {
-            var result = _carImagesService.Add(file, carImages);
+            carImage.ImageDate = DateTime.Now;
+            carImage.ImagePath = FileHelper.AddAsync(file);
+            var result = _carImagesService.Add(carImage);
+
             if (result.Success)
             {
                 return Ok(result);
             }
+
             return BadRequest(result);
         }
         [HttpPost("delete")]
-        public IActionResult Delete(CarImages carImages)
+        public IActionResult Delete(CarImage carImages)
         {
             var result = _carImagesService.Delete(carImages);
             if (result.Success)
@@ -51,7 +56,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("update")]
-        public IActionResult Update(CarImages carImages)
+        public IActionResult Update(CarImage carImages)
         {
             var result = _carImagesService.Update(carImages);
             if (result.Success)
