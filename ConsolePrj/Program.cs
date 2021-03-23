@@ -74,11 +74,11 @@ namespace ConsolePrj
         {
             CarManager carManager = new CarManager(new EfCarDal());
 
-            foreach (var car in carManager.GetCarDetails().Data)
-            {
-                Console.WriteLine("Car Name : " + car.CarName + "\t Brand Name :" + car.BrandName +
-                                "\t Color Name :  " + car.ColorName + "\t DailyPrice : " + car.DailyPrice);
-            }
+            //foreach (var car in carManager.GetCarDetails().Data)
+            //{
+            //    Console.WriteLine("Car Name : " + car.CarName + "\t Brand Name :" + car.BrandName +
+            //                    "\t Color Name :  " + car.ColorName + "\t DailyPrice : " + car.DailyPrice);
+            //}
         }
 
         private static void CarText()
