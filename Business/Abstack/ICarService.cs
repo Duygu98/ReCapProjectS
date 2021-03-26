@@ -19,6 +19,10 @@ namespace Business.Abstack
         IDataResult<List<CarDetailDto>> GetCarDetails();
 
 
+        IDataResult<List<CarDetailDto>> GetCarDetailsById(int carId);
+        IDataResult<List<CarDetailDto>> GetCarDetailsByBrandAndColorId(int brandId, int colorId);
+
+
         IDataResult<List<CarDetailDto>> GetCarDetailsFilter(int brandId, int colorId);
         IDataResult<List<CarDetailDto>> GetCarsByBrandIdList(int brandId);
         IDataResult<List<CarDetailDto>> GetCarsByColorIdList(int colorId);

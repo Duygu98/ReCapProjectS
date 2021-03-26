@@ -13,6 +13,10 @@ namespace Business.Constants
         public static string CarUpdate = "Araba Güncellendi";
         public static string CarDelete = "Araba Kayıdı Silindi";
 
+        public static string CarImageListed = "Araba resimleri listelendi";
+        public static string CarImageAdded = "Araba resmi eklendi";
+        public static string CarImageUpdated = "Araba resmi güncellendi";
+        public static string FailAddedImageLimit = "Resim limitine erişildi";
 
         public static string BrandAdded = "Marka eklendi.";
         public static string BrandNameInvalid = "Marka adı geçersiz";
@@ -39,8 +43,9 @@ namespace Business.Constants
         public static string ImageUpdate = "Sistem Bakımda";
         public static string CarImagesCount = "Sistem Bakımda";
         public static string ImageAdded = "Sistem Bakımda";
-        public static string FailAddedImageLimit = "Resim limitine erişildi";
-        
+
+        public static string CarImageLimitExceeded = "Car Image Limit Exceeded!";
+
 
         public static string CustomerDelete { get; internal set; }
         public static string CustomerUpdate { get; internal set; }
