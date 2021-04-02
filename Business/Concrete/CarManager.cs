@@ -67,12 +67,9 @@ namespace Business.Concrete
         
         }
 
-        public IDataResult<List<CarDetailDto>> GetCarDetailsFilter(int brandId, int colorId)
+        public IDataResult<List<CarDetailDto>> GetCarsByFilter(int brandId, int colorId)
         {
-
-            return new SuccessDataResult<List<CarDetailDto>>(
-                _car.GetCarDetails(c => c.BrandId == brandId && c.ColorId == colorId),
-                Messages.CarListed);
+            return new SuccessDataResult<List<CarDetailDto>>(_car.GetCarsByFilter(colorId, brandId));
         }
 
         public IDataResult<List<CarDetailDto>> GetCarsByBrandIdList(int brandId)
@@ -98,6 +95,43 @@ namespace Business.Concrete
         public IDataResult<List<CarDetailDto>> GetCarDetailsByBrandAndColorId(int brandId, int colorId)
         {
             return new SuccessDataResult<List<CarDetailDto>>(_car.GetCarDetails(c => c.BrandId == brandId && c.ColorId == colorId), Messages.CarListed);
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarsDetailsByBrandId(int id)
+        {
+
+            List<CarDetailDto> carDetailDto = _car.GetCarsDetailsByBrandId(id);
+
+            var result = CheckNullImageList(carDetailDto);
+
+            return new SuccessDataResult<List<CarDetailDto>>(result, Messages.BrandListed);
+        }
+        private List<CarDetailDto> CheckNullImageList(List<CarDetailDto> carDetailDtos)
+        {
+
+            foreach (var carDetailDto in carDetailDtos)
+            {
+                CheckNullImageSingle(carDetailDto.CarImages, carDetailDto.CarId);
+            }
+            return carDetailDtos;
+        }
+        private List<CarImage> CheckNullImageSingle(List<CarImage> carImages, int carId)
+        {
+            string path = @"\Uploads\default.jpg";
+            if (carImages.Count == 0)
+            {
+                carImages.Add(new CarImage { ImagePath = path, CarId = carId, ImageDate = null });
+            }
+            return carImages;
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarsDetailsByColorId(int id)
+        {
+            List<CarDetailDto> carDetailDto = _car.GetCarsDetailsByColorId(id);
+
+            var result = CheckNullImageList(carDetailDto);
+
+            return new SuccessDataResult<List<CarDetailDto>>(result, Messages.ColorListed);
         }
     }
 }

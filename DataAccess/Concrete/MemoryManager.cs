@@ -77,6 +77,21 @@ namespace DataAccess.Concrete
             throw new NotImplementedException();
         }
 
+        public List<CarDetailDto> GetCarsByFilter(int colorId, int brandId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<CarDetailDto> GetCarsDetailsByBrandId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<CarDetailDto> GetCarsDetailsByColorId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(Car car)
         {
             Car _carsUpdate = _cars.SingleOrDefault(c => c.Id == car.Id);
