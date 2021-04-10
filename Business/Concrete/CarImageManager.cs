@@ -17,7 +17,7 @@ namespace Business.Concrete
 {
     public class CarImageManager : ICarImageService
     {
-        ICarImagesDal _carImageDal;
+         ICarImagesDal _carImageDal;
 
         public CarImageManager(ICarImagesDal carImageDal)
         {
@@ -37,7 +37,7 @@ namespace Business.Concrete
             carImage.ImagePath = FileHelper.Add(file);
             carImage.ImageDate = DateTime.Now;
             _carImageDal.Add(carImage);
-            return new SuccessResult();
+            return new SuccessResult(Messages.CarImageAdded);
         }
 
         [ValidationAspect(typeof(CarImageValidator))]

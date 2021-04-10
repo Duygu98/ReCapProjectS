@@ -1,6 +1,7 @@
 ﻿using Business.Abstack;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstack;
@@ -82,6 +83,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarDetailDto>>(_car.GetCarDetails(c => c.ColorId == colorId));
         }
 
+        [CacheAspect]
         public IDataResult<List<CarDetailDto>> GetCarDetailsByCarId(int carId)
         {
             return new SuccessDataResult<List<CarDetailDto>>(_car.GetCarDetails(c => c.Id == carId));

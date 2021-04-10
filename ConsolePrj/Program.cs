@@ -15,7 +15,7 @@ namespace ConsolePrj
             //CarText1();
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
             CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
-            var kira = 0;
+            //var kira = 0;
             // Müşteri Ekleme
             Customer customer1 = new Customer();
             customer1.CustomerId =5;
@@ -42,26 +42,26 @@ namespace ConsolePrj
             customerManager.Add(customer3);
             customerManager.Add(customer4);
 
-            if (kira==0)
-            {
-                Rental rental = new Rental();
-                rental.Id = 5;
-                rental.CustomerId = 3;
-                rental.CarId = 2;
-                rental.RentDate = "12/02/2021";
-                rental.ReturnDate = "12/03/2021";
-                if (rental.ReturnDate!=null)
-                {
-                    Console.WriteLine("Bu işlemi yapmazsınız.");
-                }
-                else
-                {
-                    rentalManager.Add(rental);
+            //if (kira==0)
+            //{
+            //    Rental rental = new Rental();
+            //    rental.Id = 5;
+            //    rental.CustomerId = 3;
+            //    rental.CarId = 2;
+            //    rental.RentDate = "12/02/2021";
+            //    rental.ReturnDate = "12/03/2021";
+            //    if (rental.ReturnDate!=null)
+            //    {
+            //        Console.WriteLine("Bu işlemi yapmazsınız.");
+            //    }
+            //    else
+            //    {
+            //        rentalManager.Add(rental);
 
-                }
+            //    }
 
 
-            }
+            //}
 
 
 

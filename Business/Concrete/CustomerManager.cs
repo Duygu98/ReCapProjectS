@@ -3,6 +3,7 @@ using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstack;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,38 +12,50 @@ namespace Business.Concrete
 {
     public class CustomerManager : ICustomerService
     {
-        ICustomerDal _customer;
-        public CustomerManager(ICustomerDal customer)
-        {
-            _customer = customer;
-        }
-        public IResult Add(Customer customer)
-        {
-            _customer.Add(customer);
-            return new SuccessResult(Messages.CustomerAdded);
-        }
 
-        public IResult Delete(Customer customer)
+        ICustomerDal _customerDal;
+
+        public CustomerManager(ICustomerDal customerDal)
         {
-            _customer.Delete(customer);
-            return new SuccessResult(Messages.CustomerDelete);
+            _customerDal = customerDal;
         }
 
         public IDataResult<List<Customer>> GetAll()
         {
+            return new SuccessDataResult<List<Customer>>(_customerDal.GetAll(), Messages.CustomerListed);
+        }
 
-            if (DateTime.Now.Hour == 21)
-            {
-                return new ErrorDataResult<List<Customer>>(Messages.MaintenanceTime);
-            }
+        public IDataResult<List<Customer>> GetByCustomerId(int id)
+        {
+            return new SuccessDataResult<List<Customer>>(_customerDal.GetAll(c => c.CustomerId == id), Messages.CustomerListed);
+        }
 
-            return new SuccessDataResult<List<Customer>>(_customer.GetAll(), Messages.ColorListed);
+        public IDataResult<List<CustomerDetailDto>> GetCustomerDetails()
+        {
+            return new SuccessDataResult<List<CustomerDetailDto>>(_customerDal.GetCustomerDetails(), Messages.CustomerListed);
+        }
+
+        public IDataResult<List<CustomerDetailDto>> GetCustomerDetailById(int customerId)
+        {
+            return new SuccessDataResult<List<CustomerDetailDto>>(_customerDal.GetCustomerDetails(c => c.CustomerId == customerId), Messages.CustomerListed);
+        }
+
+        public IResult Add(Customer customer)
+        {
+            _customerDal.Add(customer);
+            return new SuccessResult(Messages.CustomerAdded);
         }
 
         public IResult Update(Customer customer)
         {
-            _customer.Update(customer);
-            return new SuccessResult(Messages.CustomerUpdate);
+            _customerDal.Update(customer);
+            return new SuccessResult(Messages.CustomerUpdated);
+        }
+
+        public IResult Delete(Customer customer)
+        {
+            _customerDal.Delete(customer);
+            return new SuccessResult(Messages.CustomerUpdated);
         }
     }
 }

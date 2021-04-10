@@ -25,14 +25,19 @@ namespace Business.Constants
         public static string ColorListed = "Colors Listelendi";
         public static string ColorAdded = "Color eklendi.";
         public static string ColorNameInvalid = "Color adı geçersiz";
+        
+        public static string RentalAdded = "Kiralama eklendi";
+        public static string RentalDeleted = "Kiralama silindi";
+        public static string RentalRentDateInvalid = "Kiralama tarihi geçersiz";
+        public static string RentalReturnDateInvalid = "Kiralama dönüş tarihi geçersiz";
+        public static string RentalUndeliveredCar = "Araç henüz teslim edilmedi.";
+        public static string RentalListed = "Kiralamalar listelendi";
+        public static string RentalUpdated = "Kiralama güncellendi";
 
-        public static string RentalListed = "Rentals Listelendi";
-        public static string RentalAdded = "Rental eklendi.";
-        public static string RentalNameInvalid = "Rental adı geçersiz";
-
-        public static string CustomerListed = "Customers Listelendi";
-        public static string CustomerAdded = "Customer eklendi.";
-        public static string CustomerInvalid = "Customer adı geçersiz";
+        public static string CustomerAdded = "Müşteri eklendi";
+        public static string CustomerCompanyNameInvalid = "Müşteri firma ismi geçersiz";
+        public static string CustomerListed = "Müşteri listelendi";
+        public static string CustomerUpdated = "Müşteri güncellendi";
 
         public static string UserListed = "Users Listelendi";
         public static string UserAdded = "User eklendi.";
@@ -47,6 +52,7 @@ namespace Business.Constants
         public static string CarImageLimitExceeded = "Car Image Limit Exceeded!";
 
 
+        public static string AuthorizationDenied = "Yetkiniz yok";
         public static string CustomerDelete { get; internal set; }
         public static string CustomerUpdate { get; internal set; }
         public static string RentalDelete { get; internal set; }
