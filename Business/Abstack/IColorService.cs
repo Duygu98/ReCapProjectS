@@ -8,12 +8,10 @@ namespace Business.Abstack
 {
     public interface IColorService
     {
-
         IResult Add(Color color);
         IResult Delete(Color color);
         IResult Update(Color color);
         IDataResult<List<Color>> GetAll();
         IDataResult<List<Color>> GetCarsByColorId(int id);
-
     }
 }

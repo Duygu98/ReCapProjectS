@@ -8,7 +8,5 @@ namespace DataAccess.Abstack
 {
     public interface ICarImagesDal : IEntityRepository<CarImage>
     {
-
-
     }
 }

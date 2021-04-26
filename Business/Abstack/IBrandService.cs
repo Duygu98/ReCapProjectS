@@ -12,8 +12,6 @@ namespace Business.Abstack
         IResult Delete(Brand brand);
         IResult Update(Brand brand);
         IDataResult<List<Brand>> GetAll();
-        IDataResult<List<Brand>> GetCarsByBrandId(int id);
-
-       
+        IDataResult<List<Brand>> GetCarsByBrandId(int id);    
     }
 }

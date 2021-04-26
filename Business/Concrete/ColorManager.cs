@@ -25,30 +25,20 @@ namespace Business.Concrete
             _color.Add(color);
             return new SuccessResult(Messages.ColorAdded);
         }
-
         public IResult Delete(Color color)
         {
             _color.Delete(color);
             return new SuccessResult();
         }
-
         public IDataResult<List<Color>> GetAll()
         {
-             
-            // if (DateTime.Now.Hour == 21)
-            //{
-            //    return new ErrorDataResult<List<Color>>(Messages.MaintenanceTime);
-            //}
-
             return new SuccessDataResult<List<Color>>(_color.GetAll(), Messages.ColorListed);
         }
-
         public IDataResult<List<Color>> GetCarsByColorId(int id)
         {
             return new SuccessDataResult<List<Color>>(_color.GetAll(c => c.ColorId == id));
 
         }
-
         public IResult Update(Color color)
         {
             _color.Update(color);

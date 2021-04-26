@@ -5,6 +5,7 @@ using Business.Abstract;
 using Business.Concrete;
 using Castle.DynamicProxy;
 using Core.Utilities.Interceptors;
+using Core.Utilities.Security.JWT;
 using DataAccess.Abstack;
 using DataAccess.Concrete.EntityFramework;
 using System;
@@ -15,7 +16,6 @@ namespace Business.DependencyResolvers.Autofac
 {
     public class AutofacBusinessModule : Module 
     {
-
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<CarManager>().As<ICarService>().SingleInstance();
@@ -39,6 +39,13 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<CarImageManager>().As<ICarImageService>().SingleInstance();
             builder.RegisterType<EfCarImageDal>().As<ICarImagesDal>().SingleInstance();
 
+            
+            builder.RegisterType<FakeCardManager>().As<IFakeCardService>().SingleInstance();
+            builder.RegisterType<EfFakeCardDal>().As<IFakeCardDal>().SingleInstance();
+
+
+            builder.RegisterType<JwtHelper>().As<ITokenHelper>();
+
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
@@ -46,10 +53,6 @@ namespace Business.DependencyResolvers.Autofac
                 {
                     Selector = new AspectInterceptorSelector()
                 }).SingleInstance();
-
-
         }
-
-
     }
 }
